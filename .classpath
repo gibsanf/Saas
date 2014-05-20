@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry excluding="main/java/|main/java/launch/" kind="src" path="src"/>
 	<classpathentry excluding="launch/" kind="src" path="src/main/java"/>
-	<classpathentry kind="src" path="src/main/java/launch"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/Java SE 6 [1.6.0_51-b11-457]">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
