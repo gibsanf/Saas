@@ -1,44 +1,61 @@
 package com.luckypants.model;
 
+import java.util.ArrayList;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
 
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Book {
 
-	String title;
-	String Author;
-	
-	
-	public String getTitle(){
+	private String title;
+
+	@JsonIgnore private Author author;
+	private String _author_id;
+	private String ISBN;
+	 @JsonDeserialize(as=ArrayList.class, contentAs=String.class)
+	private ArrayList<String> genres;
+
+	public String getTitle() {
 		return title;
 	}
-	
-	public String getAuthor(){
-		return Author;
-	}
-	
-	public void setTitle( String title){
+
+	public void setTitle(String title) {
 		this.title = title;
-		
+	}
+
+	public String getISBN() {
+		return ISBN;
+	}
+
+	public void setISBN(String iSBN) {
+		ISBN = iSBN;
 	}
 	
-	public void setAuthor(String author){
-		this.Author = author;
+	public ArrayList<String> getGenres() {
+		return genres;
 	}
-	public static void  main(String[] args){
-		Book book= new Book();
-		book.title ="Making book meaning full";
-		book.Author ="Katy siera";
-				
-		System.out.println("Title:"+book.title);
-		System.out.println("Autor:"+book.Author);
-		
-		Book book2 = new Book();
-		
-		book2.title ="Head first servlet";
-		book2.Author ="bryan hasim";
-		
-		System.out.println("Title:"+book2.title);
-		System.out.println("Autor:"+book2.Author);
-		
+	 @JsonDeserialize(as=ArrayList.class, contentAs=String.class)
+	public void setGenres(ArrayList<String> genres) {
+		this.genres = genres;
 	}
+
+	public Author getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(Author author) {
+		this.author = author;
+	}
+
+	public String get_author_id() {
+		return _author_id;
+	}
+
+	public void set_author_id(String _author_id) {
+		this._author_id = _author_id;
+	}
+
 }
