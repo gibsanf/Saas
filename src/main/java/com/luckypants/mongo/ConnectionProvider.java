@@ -2,6 +2,7 @@ package com.luckypants.mongo;
 
 import java.net.UnknownHostException;
 
+import com.luckypants.properties.PropertiesLookup;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
@@ -15,15 +16,15 @@ public class ConnectionProvider {
 
 	public DBCollection getCollection(String collectionName) {
 		try {
-
-			MongoClient mongo = new MongoClient("oceanic.mongohq.com", 10099);
+			PropertiesLookup mypro = new PropertiesLookup();
+			MongoClient mongo = new MongoClient(mypro.getProperty("mongoDBURL"), Integer.parseInt(mypro.getProperty("mongoport")));
 
 			DB db = mongo.getDB("luckypants");
 			if (db == null) {
 				System.out.println("Could not connect to Database");
 			}
 
-			boolean auth = db.authenticate("unh", "unh".toCharArray());
+			boolean auth = db.authenticate(mypro.getProperty("username"), mypro.getProperty("password").toCharArray());
 			if (auth == false) {
 				System.out.println("Could not authenticate");
 			}

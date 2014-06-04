@@ -24,9 +24,10 @@ import com.luckypants.command.DeleteBookCommand;
 import com.luckypants.command.GetBookCommand;
 import com.luckypants.command.ListAllBooksCommand;
 import com.luckypants.command.ProvidePackagedFileCommand;
+import com.luckypants.model.Author;
 import com.luckypants.model.Book;
 import com.luckypants.properties.PropertiesLookup;
-
+import com.luckypants.command.ListAllAuthorsCommand;
 @Path("/books")
 public class BookService {
 	ObjectMapper mapper = new ObjectMapper();
@@ -45,6 +46,25 @@ public class BookService {
 		return Response.status(200).entity(booksString).build();
 	}
 
+	
+	@GET
+	@Path("/authors")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response listAuthor() {
+		ListAllAuthorsCommand myAuthorList = new ListAllAuthorsCommand();
+		ArrayList<Author> listAuthor = myAuthorList.execute();
+		String authorsstr = new String();
+		try {
+			authorsstr = mapper.writeValueAsString(listAuthor);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Response.status(200).entity(authorsstr).build();
+	}
+	
+	
+	
+	
 	@GET
 	@Path("properties/{property}")
 	@Produces(MediaType.APPLICATION_JSON)

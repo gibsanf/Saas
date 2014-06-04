@@ -10,33 +10,41 @@ import com.mongodb.util.JSON;
 
 public class CreateAuthorCommand {
 
-	public String execute(Author author) {
-		ConnectionProvider conn = new ConnectionProvider();
-		DBCollection collection = conn.getCollection("authors");
+	public String execute(Author myauthors) {
+		ConnectionProvider myconn = new ConnectionProvider();
+		DBCollection collection = myconn.getCollection("authors");
 
-		ObjectMapper mapper = new ObjectMapper();
+		ObjectMapper mymapper = new ObjectMapper();
 		try {
-			DBObject dbObject = (DBObject) JSON.parse(mapper
-					.writeValueAsString(author));
-			collection.insert(dbObject);
-			return dbObject.get("_id").toString();
+			DBObject mydbObjects = (DBObject) JSON.parse(mymapper
+					.writeValueAsString(myauthors));
+			collection.insert(mydbObjects);
+			return mydbObjects.get("_id").toString();
 			
 		} catch (Exception e) {
-			System.out.println("ERROR during mapping author to Mongo Object");
+			System.out.println("error inserting author infor to mongo author collection");
 			return null;
 		}
 	}
 
 	public static void main(String[] args) {
-		CreateAuthorCommand create = new CreateAuthorCommand();
-		Author author = new Author();
-		author.setFname("Gula");
-		author.setLname("Nurmatova");
-		Object id = create.execute(author);
-		if ( id!=null) {
-			System.out.println("SUCCESS:Author Created:"+id);
+		CreateAuthorCommand createMyAuthors = new CreateAuthorCommand();
+		Author myAuthors = new Author();
+		myAuthors.setFname("Gibsan");
+		myAuthors.setLname("Abdu");
+		Object id = createMyAuthors.execute(myAuthors);
+		
+		Author myAuthors2 = new Author();
+		myAuthors2.setFname("Gibsan");
+		myAuthors2.setLname("Abdu");
+		Object id2 = createMyAuthors.execute(myAuthors2);
+		
+		
+		if ( id!=null && id2!=null) {
+			System.out.println(" Author One sucessfully Created:"+id);
+			System.out.println(" Author Two sucessfully Created:"+id2);
 		} else {
-			System.out.println("ERROR:Failed to create author");
+			System.out.println("Error : failed in creating Authors");
 		}
 
 	}

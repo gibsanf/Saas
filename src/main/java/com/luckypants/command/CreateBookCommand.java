@@ -16,6 +16,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import com.luckypants.command.CreateBookCommand;
 import com.luckypants.model.Book;
+import com.luckypants.model.Author; 
+
 import com.luckypants.mongo.BooksConnectionProvider;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
@@ -25,33 +27,51 @@ import com.mongodb.util.JSON;
 
 public class CreateBookCommand {
 
-	public boolean execute(Book book) {
-		BooksConnectionProvider bookConn = new BooksConnectionProvider();
-		DBCollection bookCollection = bookConn.getCollection();
+	public boolean execute(Book mybooks) {
+		BooksConnectionProvider connectionBook = new BooksConnectionProvider();
+		DBCollection tablebook = connectionBook.getCollection();
 
-		ObjectMapper mapper = new ObjectMapper();
+		ObjectMapper mymapperObj = new ObjectMapper();
 		try {
-			DBObject dbObject = (DBObject) JSON.parse(mapper.writeValueAsString(book)) ;
-			bookCollection.insert(dbObject);
+			DBObject dbObject = (DBObject) JSON.parse(mymapperObj.writeValueAsString(mybooks)) ;
+			tablebook.insert(dbObject);
 		} catch (Exception e) {
-			System.out.println("ERROR during mapping books to Mongo Object");
+			System.out.println("error inserting books to books collection on Mongo DB");
 			return false;
 		}
 		return true;
 	}
 
 	public static void main(String[] args) {
-		CreateBookCommand  create = new CreateBookCommand ();
-		Book book = new Book();
-		//book.setAuthor("Gibsan");
-		book.setTitle("FirstIos");
-		book.setISBN("1234");
-		if (create.execute(book)) {
-			System.out.println("SUCCESS:Book Created");
-		} else {
-			System.out.println("ERROR:Failed to create book");
+		CreateBookCommand  createmybooks = new CreateBookCommand ();
+		CreateAuthorCommand createmyauthors = new CreateAuthorCommand();
+		
+		Author author = new Author();
+		author.setFname("Gibsn");
+		author.setLname("Abdu");
+		
+		Book mybooks= new Book();
+		String _id = createmyauthors.execute(author);
+		mybooks.setTitle("storeForntAspdotnet");
+		mybooks.setISBN("12");
+		mybooks.set_author_id(_id);
+		
+		ArrayList <String> genlist = new ArrayList<String>();
+		genlist.add("E-commerce");
+		genlist.add("DotNet Website");
+		mybooks.setGenres(genlist);
+		if (createmybooks.execute(mybooks)){
+			System.out.println("books are succefully created");
+			
+		}else{
+			System.out.println("failed in creating books");
 		}
-
 	}
-	
 }
+		
+		
+		
+		
+		
+		
+	
