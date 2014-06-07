@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry including="**/*.java" kind="src" path="src/main/java"/>
-	<classpathentry kind="src" path="src/main/resource"/>
+	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="var" path="M2_REPO/javax/ws/rs/jsr311-api/1.1.1/jsr311-api-1.1.1.jar"/>
 	<classpathentry kind="var" path="M2_REPO/javax/xml/bind/jaxb-api/2.2.2/jaxb-api-2.2.2.jar"/>
 	<classpathentry kind="var" path="M2_REPO/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2.jar"/>
@@ -35,5 +35,6 @@
 	<classpathentry kind="var" path="M2_REPO/org/apache/tomcat/tomcat-jasper-el/7.0.53/tomcat-jasper-el-7.0.53.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/apache/tomcat/tomcat-api/7.0.53/tomcat-api-7.0.53.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/apache/tomcat/tomcat-util/7.0.53/tomcat-util-7.0.53.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/config.properties"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

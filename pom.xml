@@ -7,16 +7,21 @@
 	<name>LuckyPants</name>
 
 	<properties>
-		<tomcat.version>7.0.53</tomcat.version>
+		<tomcat.version>7.0.34</tomcat.version>
 		<jersey.version>1.9</jersey.version>
 		<jackson.version>1.8.1</jackson.version>
-		<target.version>1.6.0</target.version>
+		<target.version>1.6</target.version>
 		<appassembler.version>1.8</appassembler.version>
-		<source.version>1.6.0</source.version>
-		<mvn.compiler.version>3.2.1</mvn.compiler.version>
+		<source.version>1.6</source.version>
+		<mvn.compiler.version>3.0</mvn.compiler.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-server</artifactId>
@@ -38,7 +43,7 @@
 			<version>${jersey.version}</version>
 		</dependency>
 		<dependency>
-		<groupId>com.sun.jersey.contribs</groupId>
+			<groupId>com.sun.jersey.contribs</groupId>
 			<artifactId>jersey-multipart</artifactId>
 			<version>${jersey.version}</version>
 		</dependency>
@@ -92,6 +97,28 @@
 	<build>
 		<finalName>LuckyPants</finalName>
 		<plugins>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/resources</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/resources</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>

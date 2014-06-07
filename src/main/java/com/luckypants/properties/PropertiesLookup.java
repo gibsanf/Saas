@@ -17,7 +17,6 @@ public class PropertiesLookup {
 				return;
 			}
 			prop.load(input);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -40,6 +40,16 @@ public class ConnectionProvider {
 		return null;
 
 	}
+	public static void main(String[] args) {
+		ConnectionProvider books = new ConnectionProvider();
+		DBCollection booksCollection = books.getCollection("books");
+		if(booksCollection == null){
+			System.out.println("ERROR:No Connection");
+		}
+		else{
+			System.out.println("SUCCESS:Connected");
+		}
 
+	}
 
 }

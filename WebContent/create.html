@@ -15,6 +15,23 @@ $(document).ready(function(){
     			}
     		});
     });
+// ends here
+// fethching author data
+        var myauthors = [];
+        var option ="";
+        $.getJSON(base_url+"authors",function(data){        	
+    		$.each(data, function(key, value){
+    			myauthors.push(value.fname + value.lname);
+      	});
+  		//console.log(myauthors);
+        	for(i=0;i<=myauthors.length; i++){
+        		 option += '<option value="'+ myauthors[i] + '">' + myauthors[i] + '</option>';
+        	}
+  		$('#list').append(option);
+  		
+        });
+    
+// end function  
     $.fn.serializeObject = function()
     {
        var o = {};
@@ -36,6 +53,9 @@ $(document).ready(function(){
     	postData($('#book_form').serializeObject());
     	return false;
     });
+    
+ // function 
+ 
     function postData(data){
         $.ajax({
                 type: "PUT",
@@ -58,10 +78,14 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-	<h1 style="text-align: center;">Create a new book</h1>
+
 	<form id="book_form" method="POST">
+		<div style="background-color: rgb(179, 106, 106); width: 300px; height: 300px; text-align: center;">
+			<h1 style="text-align: center;">Create a new book</h1>
 		<div class="book_div"></div>
-		<input type="Submit">
+		Select Author: <select id="list"> </select>
+		<br><input type="Submit">
+		</div>
 	</form>
 </body>
 </html>
